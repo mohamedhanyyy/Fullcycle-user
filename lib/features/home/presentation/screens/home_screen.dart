@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final pages = [
     const MainScreen(),
     const ChatsScreen(),
-    const MyTasksScreen(),
+      MyTasksScreen(),
     const ProfileScreen(),
   ];
   final titles = [
