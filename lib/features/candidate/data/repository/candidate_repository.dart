@@ -46,7 +46,6 @@ class CandidateRepository {
 
       return response;
     } catch (e) {
-      print("❌ Upload failed: $e");
       return null;
     }
   }

@@ -43,25 +43,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Stack(
-                children: [
-                  const CircleAvatar(
-                    radius: 50,
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: CircleAvatar(
-                      radius: 16,
-                      backgroundColor: Colors.grey.shade200,
-                      child:
-                          const Icon(Icons.edit, size: 18, color: Colors.black),
-                    ),
-                  )
-                ],
-              ),
-            ),
 
             sectionTitle("الهوية الشخصية"),
             buildTextField("الاسم بالعربي", arabicNameController),
@@ -116,7 +97,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: DropdownButtonFormField<String>(
-        value: value,
+        initialValue: value,
         isExpanded: true,
         decoration: InputDecoration(
           labelText: label,

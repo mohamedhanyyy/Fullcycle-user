@@ -232,7 +232,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
     } catch (e) {
       placeName = 'خطأ في جلب العنوان';
       setState(() {});
-      print("Error: $e");
+      // print("Error: $e");
     }
   }
 }
