@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class GeneralFunctions {
   static unFocusCursorRTL(TextEditingController controller) {
@@ -16,6 +15,4 @@ class GeneralFunctions {
       FocusManager.instance.primaryFocus?.unfocus();
     }
   }
-
-  static setPreferredOrientation() => SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-}
+ }

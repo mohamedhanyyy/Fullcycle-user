@@ -32,21 +32,24 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
             height: 350,
             child: Stack(
               children: [
-                Image.asset('assets/images/camel.png',height: 260,fit: BoxFit.fill,),
+                Image.asset(
+                  'assets/images/camel.png',
+                  height: 260,
+                  fit: BoxFit.fill,
+                ),
                 Positioned(
                   top: 200,
                   left: 10,
                   right: 10,
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                     padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(5)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         Card(
                           margin: const EdgeInsets.only(top: 20),
                           elevation: 0,
@@ -63,7 +66,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                               children: [
                                 SvgPicture.asset('assets/icons/lc.svg'),
                                 Text(
-                                  '$placeName',
+                                  '${widget.event.cityName}',
                                   style: const TextStyle(
                                     color: AppColors.primaryColor,
                                     fontWeight: FontWeight.w500,
@@ -77,7 +80,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                         Padding(
                           padding: const EdgeInsets.only(top: 10, bottom: 10),
                           child: Text(
-                            widget.event.eventName,
+                            widget.event.eventName!,
                             style: const TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w600,
@@ -99,10 +102,10 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                     ),
                   ),
                 ),
-                  Positioned(
-                    top:50,
+                Positioned(
+                    top: 50,
                     left: 10,
-                    child:                 Container(
+                    child: Container(
                       decoration: BoxDecoration(
                         color: Colors.grey.shade200,
                         borderRadius: BorderRadius.circular(6),
@@ -116,15 +119,15 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                             SvgPicture.asset('assets/icons/hour.svg'),
                             const SizedBox(width: 5),
                             Text(
-                              EventDateHelper.timeLeftUntil(widget.event.eventEndDate),
+                              EventDateHelper.timeLeftUntil(
+                                  DateTime.parse(widget.event.eventEndDate!)),
                               style: const TextStyle(fontSize: 11.4),
                               maxLines: 2,
                             ),
                           ],
                         ),
                       ),
-                    )
-                ),
+                    )),
                 const Positioned(
                     top: 40,
                     right: 10,
@@ -167,23 +170,23 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                     ],
                   ),
                   const SizedBox(height: 12),
-                  const Expanded(
+                    Expanded(
                     child: TabBarView(
                       children: [
                         // Description Tab
                         Padding(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           child: SingleChildScrollView(
                             child: Text(
-                              "تفاصيل الوظيفة:\n\nهنا تظهر تفاصيل الوظيفة هنا تظهر تفاصيل الوظيفة هنا تظهر تفاصيل الوظيفة هنا تظهر تفاصيل الوظيفة هنا تظهر تفاصيل الوظيفة هنا تظهر تفاصيل الوظيفة هنا تظهر تفاصيل الوظيفة هنا تظهر تفاصيل الوظيفة.",
+                              widget.event.description!,
                               textAlign: TextAlign.justify,
-                              style: TextStyle(fontSize: 14),
+                              style: const TextStyle(fontSize: 14),
                             ),
                           ),
                         ),
-                        Center(child: Text("الفترات")),
-                        Center(child: Text("الموقع")),
+                        const Center(child: Text("قيد التطوير")),
+                        Center(child: Text("$placeName")),
                       ],
                     ),
                   ),
@@ -219,7 +222,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   getLocationName() async {
     try {
       final placemarks = await placemarkFromCoordinates(
-          widget.event.latitude, widget.event.latitude);
+          widget.event.latitude!, widget.event.latitude!);
 
       if (placemarks.isNotEmpty) {
         placeName = placemarks.first.name;

@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fullcycle/core/cubit/base_cubit_state.dart';
+import '../../candidate/data/repository/candidate_repository.dart';
 import '../data/model/sub_zone_model.dart';
-import '../data/repository/events_repository.dart';
 
 class GetEventSubZonesCubit extends Cubit<CubitState> {
   GetEventSubZonesCubit() : super(CubitState.initial);
@@ -15,7 +15,7 @@ class GetEventSubZonesCubit extends Cubit<CubitState> {
 
     try {
       final response =
-          await EventsRepository.getSubZonesOfEvent(eventId, zoneId);
+          await CandidateRepository.getSubZonesOfEvent(eventId, zoneId);
       if (response != null) {
         subZones =
             (response.data as List).map((e) => SubZoneModel.fromJson(e)).toList();

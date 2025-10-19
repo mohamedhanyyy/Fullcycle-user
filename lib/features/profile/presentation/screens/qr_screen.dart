@@ -60,7 +60,7 @@ class _AttendanceQrScreenState extends State<AttendanceQrScreen> {
                 items: eventsCubit.events
                     .map((e) => DropdownMenuItem<EventModel>(
                           value: e,
-                          child: Text(e.eventName),
+                          child: Text(e.eventName!),
                         ))
                     .toList(),
                 onChanged: (value) {
@@ -101,7 +101,7 @@ class _AttendanceQrScreenState extends State<AttendanceQrScreen> {
                             onChanged: (value) {
                               zone = value!;
                               setState(() {});
-                              qrCodeCubit.getSubZones(value.value);
+                              qrCodeCubit.getSubZones(event!.id,value.value);
                             },
                           ),
                         ],

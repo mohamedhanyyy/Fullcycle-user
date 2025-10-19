@@ -2,8 +2,6 @@ class EndPoints {
   static String baseUrl = 'https://api.mshware.com/api/';
 
   static const String sendOTP = 'user';
-  static const String getSurvey = 'Orphan/getSurvey';
-  static const String updateSurvey = 'Orphan/updateSurvey';
   static const String login = 'User/login';
   static const String refreshToken = 'User/RefreshToken';
   static const String candidateGetMobile = 'Candidate/GetMobile';
@@ -19,6 +17,7 @@ class EndPoints {
   static const String candidateGetExperience = 'Experince/getExperience';
   static const String getCandidate = 'Candidate/GetCandidate';
   static const String getAllActiveEvents = 'Event/GetAllActiveEvents';
+  static const String getLookUps = 'LookUps/GetCandidateLookups';
   static const String getZonesOfEvent = 'Event/GetZonesOfEvent';
   static const String getSubZonesOfEvent = 'Event/GetSubZonesOfEvent';
   static const String candidateGetQrString = 'Candidate/GetQrString';

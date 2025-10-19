@@ -30,10 +30,10 @@ class GetCandidateQRCodeCubit extends Cubit<CubitState> {
     qrCodeModel=null;
     emit(CubitState.done);
   }
-  getSubZones(zoneId) async {
+  getSubZones(eventId,zoneId) async {
     emit(CubitState.loading);
 
-    final response = await CandidateRepository.getSubZonesOfEvent(zoneId);
+    final response = await CandidateRepository.getSubZonesOfEvent(eventId,zoneId);
     if (response?.statusCode == 200) {
       subZones =
           (response?.data as List).map((e) => ZoneModel.fromJson(e)).toList();

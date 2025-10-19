@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fullcycle/core/cubit/base_cubit_state.dart';
+import '../../candidate/data/repository/candidate_repository.dart';
 import '../data/model/zone_model.dart';
-import '../data/repository/events_repository.dart';
 
 class GetEventZonesCubit extends Cubit<CubitState> {
   GetEventZonesCubit() : super(CubitState.initial);
@@ -14,7 +14,7 @@ class GetEventZonesCubit extends Cubit<CubitState> {
     emit(CubitState.loading);
 
     try {
-      final response = await EventsRepository.getZonesOfEvent(id);
+      final response = await CandidateRepository.getZonesOfEvent(id);
       if (response != null) {
         zones =
             (response.data as List).map((e) => ZoneModel.fromJson(e)).toList();

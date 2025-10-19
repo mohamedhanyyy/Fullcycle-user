@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fullcycle/core/cubit/base_cubit_state.dart';
+import 'package:fullcycle/features/candidate/data/repository/candidate_repository.dart';
 import 'package:fullcycle/features/events/data/model/event_model.dart';
-import '../data/repository/events_repository.dart';
 
 class GetActiveEventsCubit extends Cubit<CubitState> {
   GetActiveEventsCubit() : super(CubitState.initial);
@@ -14,10 +14,10 @@ class GetActiveEventsCubit extends Cubit<CubitState> {
     emit(CubitState.loading);
 
     try {
-      final response = await EventsRepository.getActiveEvents();
+      final response = await CandidateRepository.getActiveEvents();
       if (response != null) {
         events =
-            (response.data as List).map((e) => EventModel.fromJson(e)).toList();
+            (response.data['data'] as List).map((e) => EventModel.fromJson(e)).toList();
         emit(CubitState.done);
       } else {
 

@@ -39,7 +39,7 @@ class EventCard extends StatelessWidget {
                 SvgPicture.asset('assets/icons/date.svg'),
                 const SizedBox(width: 4),
                 Text(
-                  'نشر في ${(event.eventStartDate.toString().split(' ').first)}',
+                  'نشر في ${(event.eventStartDate.toString().split('T').first)}',
                   style: const TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w500,
@@ -60,7 +60,8 @@ class EventCard extends StatelessWidget {
                         SvgPicture.asset('assets/icons/hour.svg'),
                         const SizedBox(width: 5),
                         Text(
-                          EventDateHelper.timeLeftUntil(event.eventEndDate),
+                          EventDateHelper.timeLeftUntil(
+                              DateTime.parse(event.eventEndDate!)),
                           style: const TextStyle(fontSize: 11.4),
                           maxLines: 2,
                         ),
@@ -89,12 +90,15 @@ class EventCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      event.eventName,
-                      style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.text),
+                    SizedBox(
+                      width: 200,
+                      child: Text(
+                        event.eventName!,
+                        style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.text),
+                      ),
                     ),
                     const SizedBox(height: 7),
                     Card(
@@ -111,9 +115,9 @@ class EventCard extends StatelessWidget {
                         child: Row(
                           children: [
                             SvgPicture.asset('assets/icons/lc.svg'),
-                            const Text(
-                              'الرياض - وزارة الرياضة',
-                              style: TextStyle(
+                            Text(
+                              '${event.cityName}',
+                              style: const TextStyle(
                                 color: AppColors.primaryColor,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,
@@ -130,50 +134,55 @@ class EventCard extends StatelessWidget {
             const SizedBox(height: 16),
             buildItem('النوع : ', 'انثي - ذكر'),
             buildItem('السن : ', '18 - 24'),
-            buildItem('الفترة : ', '17 إلي 30 سبتمبر 2025'),
-            const SizedBox(height: 14),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(14),
-              decoration: BoxDecoration(
-                color: const Color(0xff384250),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Specializations
-                  const Text(
-                    "التخصصات المطلوبة:",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.white),
-                  ),
-                  Wrap(
-                    spacing: 3,
-                    children: [
-                      for (var tag in [
-                        "تسويق",
-                        "برمجة",
-                        "تصميم",
-                        "إدارة أعمال",
-                        'تصميم'
-                      ])
-                        Card(
-                          elevation: 0,
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 4),
-                            child: Text(tag),
-                          ),
-                        ),
-                    ],
-                  ),
-                ],
-              ),
+
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'الوصف : ',
+                  style: TextStyle(color: Color(0xff4D5761), fontSize: 16),
+                ),
+                Flexible(child: Text(event.description??"", style: const TextStyle(fontSize: 16))),
+              ],
             ),
+             const SizedBox(height: 14),
+            if (event.departments?.isNotEmpty == true)
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: const Color(0xff384250),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Specializations
+                    const Text(
+                      "التخصصات المطلوبة:",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                    Wrap(
+                      spacing: 3,
+                      children: [
+                        for (var tag in event.departments ?? [])
+                          Card(
+                            elevation: 0,
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 4),
+                              child: Text(tag),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
           ],
         ),
       ),
@@ -187,7 +196,7 @@ class EventCard extends StatelessWidget {
           label,
           style: const TextStyle(color: Color(0xff4D5761), fontSize: 16),
         ),
-        Text(title, style: const TextStyle(fontSize: 16)),
+        Flexible(child: Text(title, style: const TextStyle(fontSize: 16))),
       ],
     );
   }

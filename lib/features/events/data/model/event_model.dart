@@ -1,38 +1,73 @@
 class EventModel {
-  final int id;
-  final String guid;
-  final String eventName;
-  final DateTime eventStartDate;
-  final DateTime eventEndDate;
-  final String startTime;
-  final String endTime;
-  final double latitude;
-  final double longitude;
+  int? id;
+  String? guid;
+  String? eventName;
+  String? eventStartDate;
+  String? eventEndDate;
+  String? startTime;
+  String? endTime;
+  double? latitude;
+  double? longitude;
+  String? description;
+  String? cityName;
+  List<String>? departments;
 
-  EventModel({
-    required this.id,
-    required this.guid,
-    required this.eventName,
-    required this.eventStartDate,
-    required this.eventEndDate,
-    required this.startTime,
-    required this.endTime,
-    required this.latitude,
-    required this.longitude,
-  });
+  EventModel(
+      {this.id,
+        this.guid,
+        this.eventName,
+        this.eventStartDate,
+        this.eventEndDate,
+        this.startTime,
+        this.endTime,
+        this.latitude,
+        this.longitude,
+        this.description,
+        this.cityName,
+        this.departments});
 
-  factory EventModel.fromJson(Map<String, dynamic> map) {
-    return EventModel(
-      id: map['id'] as int,
-      guid: map['guid'] as String,
-      eventName: map['eventName'] as String,
-      eventStartDate: DateTime.parse(map['eventStartDate']),
-      eventEndDate: DateTime.parse(map['eventEndDate']),
-      startTime: map['startTime'] as String,
-      endTime: map['endTime'] as String,
-      latitude: (map['latitude'] as num).toDouble(),
-      longitude: (map['longitude'] as num).toDouble(),
-    );
+  EventModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    guid = json['guid'];
+    eventName = json['eventName'];
+    eventStartDate = json['eventStartDate'];
+    eventEndDate = json['eventEndDate'];
+    startTime = json['startTime'];
+    endTime = json['endTime'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
+    description = json['description'];
+    cityName = json['cityName'];
+    if (json['departments'] != null) {
+      if (json['departments'] is List) {
+        departments = (json['departments'] as List)
+            .map((e) => e is String ? e : e.toString())
+            .toList();
+      } else if (json['departments'] is String) {
+        departments = [json['departments']];
+      } else {
+        departments = [];
+      }
+    } else {
+      departments = [];
+    }
+
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['guid'] = guid;
+    data['eventName'] = eventName;
+    data['eventStartDate'] = eventStartDate;
+    data['eventEndDate'] = eventEndDate;
+    data['startTime'] = startTime;
+    data['endTime'] = endTime;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
+    data['description'] = description;
+    data['cityName'] = cityName;
+    // data['departments'] = departments;
+    return data;
   }
 }
-

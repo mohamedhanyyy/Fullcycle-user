@@ -1,10 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fullcycle/core/cubit/base_cubit_state.dart';
 import 'package:fullcycle/features/auth/screens/login_screen.dart';
-import 'package:fullcycle/features/candidate/data/models/candidate_model.dart';
 import 'package:fullcycle/features/candidate/data/repository/candidate_repository.dart';
 import 'package:fullcycle/services/navigation/navigation.dart';
-import 'package:fullcycle/services/cache/cache_helper.dart';
+import 'package:fullcycle/shared/widgets/custom_snack_bar.dart';
 
 class RegisterCubit extends Cubit<CubitState> {
   RegisterCubit() : super(CubitState.initial);
@@ -15,12 +14,16 @@ class RegisterCubit extends Cubit<CubitState> {
     required String idNumber,
     required int cityId,
     required String dob,
-    required String gender,
-    required String nationality,
+    required int gender,
+    required int nationality,
     required String email,
-    required String height,
-    required String weight,
-    required String tshirtSize,
+    required int height,
+    required int weight,
+    required int tshirtSize,
+    required int educationId,
+    required int languageId,
+    required int departmentId,
+
     required String phoneNumber,
   }) async {
     emit(CubitState.loading);
@@ -29,9 +32,11 @@ class RegisterCubit extends Cubit<CubitState> {
       arabicName: arabicName,
       englishName: englishName,
       idNumber: idNumber,
+      departmentId: departmentId,
+      educationId: educationId,
+      languageId: languageId,
       email: email,
       cityId: cityId,
-
       dob: dob,
       gender: gender,
       nationality: nationality,
@@ -41,12 +46,15 @@ class RegisterCubit extends Cubit<CubitState> {
       phoneNumber: phoneNumber,
     );
 
-    if (response?.status == 200) {
+    if (response?.statusCode == 200) {
       emit(CubitState.done);
-      await CacheHelper.saveCandidate(response!.data! as CandidateData);
+      // final candidateModel = CandidateModel.fromJson(response?.data);
+      // await CacheHelper.saveCandidate(candidateModel.data);
       AppNavigation.navigateOffAll(const LoginScreen());
+      CustomSnackBars.showSuccessToast(title:'تم انشاء الحساب بنجاح');
     } else {
       emit(CubitState.error);
+      CustomSnackBars.showErrorToast(title: response?.data['message']??"error");
     }
   }
 }

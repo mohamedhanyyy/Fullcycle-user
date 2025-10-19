@@ -33,9 +33,14 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>MinimumOSVersion</key>
-	<string>13.0</string>
+	<string>15.0</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+
+	<key>NSPhotoLibraryUsageDescription</key>
+    <string>This app needs access to your photos to let you upload images.</string>
+	<key>NSCameraUsageDescription</key>
+    <string>We use the camera to allow users to take profile photos and upload documents for their account.</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:fullcycle/features/candidate/data/models/experiences_model.dart';
+import 'package:fullcycle/features/candidate/data/models/lookup_model.dart';
 import 'package:fullcycle/services/cache/cache_helper.dart';
 import 'package:fullcycle/services/navigation/navigation.dart';
 import 'package:fullcycle/shared/widgets/custom_snack_bar.dart';
@@ -13,6 +14,17 @@ import '../../../../shared/model/user_model.dart';
 import '../models/candidate_model.dart';
 
 class CandidateRepository {
+
+  static LookupModel? lookupModel;
+  static Future<LookupModel?> getLookUps() async {
+    final response = await DioHelper.getData(url: EndPoints.getLookUps);
+    if (response?.statusCode == 200) {
+      lookupModel= LookupModel.fromJson(response?.data);
+    } else {
+      errorHandler(response);
+    }
+    return null;
+  }
   static Future<Response?> uploadDocument({
     required String filePath,
     required String documentType,
@@ -217,7 +229,7 @@ class CandidateRepository {
 
   static Future<Response?> getZonesOfEvent(id) async {
     final response = await DioHelper.getData(
-        url: EndPoints.getZonesOfEvent, query: {'zoneId': id});
+        url: EndPoints.getZonesOfEvent, query: {'eventId': id});
     if (response?.statusCode == 200) {
       return response;
     } else {
@@ -226,9 +238,10 @@ class CandidateRepository {
     return null;
   }
 
-  static Future<Response?> getSubZonesOfEvent(id) async {
+  static Future<Response?> getSubZonesOfEvent(eventId, zoneId) async {
     final response = await DioHelper.getData(
-        url: EndPoints.getSubZonesOfEvent, query: {'subZoneId': id});
+        url: EndPoints.getSubZonesOfEvent,
+        query: {'zoneId': zoneId, 'eventId': eventId});
     if (response?.statusCode == 200) {
       return response;
     } else {
@@ -297,52 +310,66 @@ class CandidateRepository {
     });
 
     if (response?.statusCode == 200) {
-
       await CacheHelper.saveToken(response?.data['data']['authToken']);
-      await CacheHelper.saveRefreshToken(response?.data['data']['refreshTokenId']);
+      await CacheHelper.saveRefreshToken(
+          response?.data['data']['refreshTokenId']);
     } else {
       errorHandler(response);
     }
   }
 
-  static Future<UserModel?> register({
+  static Future<Response?> getActiveEvents() async {
+    final response = await DioHelper.getData(url: EndPoints.getAllActiveEvents);
+    if (response?.statusCode == 200) {
+      return response;
+    } else {
+      errorHandler(response);
+    }
+    return null;
+  }
+
+
+
+  static Future<Response?> register({
     required String arabicName,
     required String englishName,
     required String idNumber,
     required String email,
     required int cityId,
     required String dob,
-    required String gender,
-    required String nationality,
-    required String height,
-    required String weight,
-    required String tshirtSize,
+    required int gender,
+    required int nationality,
+    required int height,
+    required int weight,
+    required int educationId,
+    required int languageId,
+    required int departmentId,
+
+    required int tshirtSize,
     required String phoneNumber,
   }) async {
     final response = await DioHelper.putData(
       url: EndPoints.addCandidate,
       data: {
-        "FullNameAr": arabicName.toString(),
-        "FullNameEn": englishName.toString(),
-        "DepartmentId": 1.toString(),
-        "EducationId": 1.toString(),
-        "Identity": idNumber.toString(),
-        "CityId": 1,
-        "DateOfBirth": dob.toString(),
-        "Email": email.toString(),
-        "LanguageId": 1.toString(),
-        "GenderId": (gender == 'ذكر' ? 1 : 0),
-        "NationalityId": 1,
-        "Height": 1,
-        "Weight": 60,
-        "T_ShirtSize": 1,
-        "MobileNumber": phoneNumber.toString(),
+        "fullNameAr": arabicName,
+        "fullNameEn": englishName,
+        "departmentId": departmentId,
+        "educationId": educationId,
+        "identity": idNumber,
+        "cityId": cityId,
+        "dateOfBirth": dob,
+        "email": email,
+        "languageId": languageId,
+        "genderId": gender,
+        "nationalityId": nationality,
+        "height": height,
+        "weight": weight,
+        "t_ShirtSize": tshirtSize,
+        "mobileNumber": phoneNumber,
+        'candidateStatus': 2,
+        'statusName': 'string',
       },
     );
-    if (response?.statusCode == 200) {
-      final user = UserModel.fromJson(response?.data);
-      return user;
-    }
-    return null;
+    return response;
   }
 }

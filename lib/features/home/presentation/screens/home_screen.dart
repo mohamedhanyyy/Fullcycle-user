@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fullcycle/core/resources/colors.dart';
 import 'package:fullcycle/features/chats/presentation/screens/chats_screen.dart';
 import 'package:fullcycle/features/main/presentation/screens/main_screen.dart';
-import 'package:fullcycle/features/mytasks/screens/mytasks_screen.dart';
 import 'package:fullcycle/features/profile/presentation/screens/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -24,7 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final pages = [
     const MainScreen(),
     const ChatsScreen(),
-    MyTasksScreen(),
+    // MyTasksScreen(),
+    const Text(''),
+
     const ProfileScreen(),
   ];
   final titles = [

@@ -5,12 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fullcycle/core/cubit/base_cubit_state.dart';
 import 'package:fullcycle/features/candidate/cubit/get_candidate_image.dart';
-import 'package:fullcycle/features/profile/presentation/screens/edit_profile_screen.dart';
 import 'package:fullcycle/services/navigation/navigation.dart';
 import 'package:fullcycle/shared/widgets/custom_loading_widget.dart';
 
 import '../../../../core/resources/colors.dart';
 import '../../../../services/cache/cache_helper.dart';
+import '../screens/edit_profile_screen.dart';
 import '../screens/share_qr_screen.dart';
 
 class ProfileHeader extends StatelessWidget {
