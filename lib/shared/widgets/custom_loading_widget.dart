@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/resources/colors.dart';
 
@@ -30,11 +29,11 @@ class CustomLoadingButtonWidget extends StatelessWidget {
         onPressed: () {
         },
         style: ElevatedButton.styleFrom(
-          minimumSize: Size.fromHeight(48.h),
+          minimumSize: Size.fromHeight(48),
           elevation: 0,
           backgroundColor: AppColors.buttonColor,
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.r)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         ),
         child: const CircularProgressIndicator.adaptive(backgroundColor: Colors.white,),
       ),

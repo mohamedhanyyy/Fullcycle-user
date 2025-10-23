@@ -194,26 +194,26 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
               ),
             ),
           ),
-          Container(
-            padding: const EdgeInsets.all(16),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF1A3C6E),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                child: const Text(
-                  "قدم الآن",
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                ),
-              ),
-            ),
-          ),
+          // Container(
+          //   padding: const EdgeInsets.all(16),
+          //   child: SizedBox(
+          //     width: double.infinity,
+          //     child: ElevatedButton(
+          //       onPressed: () {},
+          //       style: ElevatedButton.styleFrom(
+          //         backgroundColor: const Color(0xFF1A3C6E),
+          //         padding: const EdgeInsets.symmetric(vertical: 14),
+          //         shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(12),
+          //         ),
+          //       ),
+          //       child: const Text(
+          //         "قدم الآن",
+          //         style: TextStyle(fontSize: 16, color: Colors.white),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

@@ -59,14 +59,14 @@ class ProfileHeader extends StatelessWidget {
                 const SizedBox(height: 12),
                 Row(
                   children: [
-                    _ActionButton(
-                      label: "تعديل حسابي",
-                      iconAsset: 'assets/icons/edit.svg',
-                      function: () {
-                        AppNavigation.navigate(const EditProfileScreen());
-                      },
-                    ),
-                    const SizedBox(width: 8),
+                    // _ActionButton(
+                    //   label: "تعديل حسابي",
+                    //   iconAsset: 'assets/icons/edit.svg',
+                    //   function: () {
+                    //     AppNavigation.navigate(const EditProfileScreen());
+                    //   },
+                    // ),
+                    // const SizedBox(width: 8),
                     _ActionButton(
                       label: "مشاركة QR",
                       iconAsset: 'assets/icons/qr.svg',
