@@ -14,17 +14,17 @@ import '../../../../shared/model/user_model.dart';
 import '../models/candidate_model.dart';
 
 class CandidateRepository {
-
   static LookupModel? lookupModel;
   static Future<LookupModel?> getLookUps() async {
     final response = await DioHelper.getData(url: EndPoints.getLookUps);
     if (response?.statusCode == 200) {
-      lookupModel= LookupModel.fromJson(response?.data);
+      lookupModel = LookupModel.fromJson(response?.data);
     } else {
       errorHandler(response);
     }
     return null;
   }
+
   static Future<Response?> uploadDocument({
     required String filePath,
     required String documentType,
@@ -88,9 +88,9 @@ class CandidateRepository {
       eventId, zoneId, subZoneId, supervisorId) async {
     final response =
         await DioHelper.getData(url: EndPoints.candidateQRCode, query: {
-      'eventId': 1,
-      'zoneId': 1,
-      'subZoneId': 1,
+      'eventId': eventId,
+      'zoneId': zoneId,
+      'subZoneId': subZoneId,
       'supervisorId': 22,
     });
     if (response?.statusCode == 200) {
@@ -109,6 +109,17 @@ class CandidateRepository {
     } else {
       errorHandler(response);
     }
+  }
+
+  static Future<Response?> joinEvent(String id) async {
+    final response = await DioHelper.postData(
+        url: EndPoints.joinEvent, query: {'eventId': id});
+    if (response?.statusCode == 200) {
+      return response;
+    } else {
+      errorHandler(response);
+    }
+    return null;
   }
 
   static Future<Response?> getMobileCandidate(String id) async {
@@ -238,9 +249,9 @@ class CandidateRepository {
   }
 
   static Future<Response?> getSubZonesOfEvent(eventId, zoneId) async {
-    final response = await DioHelper.getData(
-        url: EndPoints.getSubZonesOfEvent,
-        query: {'zoneId': zoneId, 'eventId': eventId});
+    final response =
+        await DioHelper.getData(url: '${EndPoints.getSubZonesOfEvent}/$zoneId');
+    // query: {'zoneId': zoneId, 'eventId': eventId});
     if (response?.statusCode == 200) {
       return response;
     } else {
@@ -327,8 +338,6 @@ class CandidateRepository {
     return null;
   }
 
-
-
   static Future<Response?> register({
     required String arabicName,
     required String englishName,
@@ -343,7 +352,6 @@ class CandidateRepository {
     required int educationId,
     required int languageId,
     required int departmentId,
-
     required int tshirtSize,
     required String phoneNumber,
   }) async {

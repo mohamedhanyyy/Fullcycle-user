@@ -3,17 +3,17 @@ import 'package:flutter/material.dart';
 import '../../core/resources/colors.dart';
 
 class CustomLoadingWidget extends StatelessWidget {
-  const CustomLoadingWidget({super.key,   this.color,this.padding});
+  const CustomLoadingWidget({super.key, this.color, this.padding});
 
   final Color? color;
   final double? padding;
   @override
   Widget build(BuildContext context) {
-    return   Padding(
-      padding:   EdgeInsets.only(top: padding??0),
+    return Padding(
+      padding: EdgeInsets.only(top: padding ?? 0),
       child: Center(
-          child:
-              CircularProgressIndicator.adaptive(backgroundColor:color?? Colors.white)),
+          child: CircularProgressIndicator.adaptive(
+              backgroundColor: color ?? Colors.white)),
     );
   }
 }
@@ -26,16 +26,16 @@ class CustomLoadingButtonWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: ElevatedButton(
-        onPressed: () {
-        },
+        onPressed: () {},
         style: ElevatedButton.styleFrom(
-          minimumSize: Size.fromHeight(48),
+          minimumSize: const Size.fromHeight(48),
           elevation: 0,
           backgroundColor: AppColors.buttonColor,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         ),
-        child: const CircularProgressIndicator.adaptive(backgroundColor: Colors.white,),
+        child: const CircularProgressIndicator.adaptive(
+          backgroundColor: Colors.white,
+        ),
       ),
     );
   }

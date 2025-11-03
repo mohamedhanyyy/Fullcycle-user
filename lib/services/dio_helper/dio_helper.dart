@@ -18,6 +18,7 @@ class DioHelper {
         followRedirects: false,
         validateStatus: (status) {
           return status! <= 505;
+
         },
       )).post(url, data: data);
 
@@ -123,8 +124,6 @@ class DioHelper {
       log('RESPONSE REQUEST OPTIONS:${response.requestOptions.data}');
       if (response.statusCode == 422 || response.statusCode == 401) {
         await CandidateRepository.generateNewToken();
-      } else if (response.statusCode == 401) {
-        AppNavigation.navigateOffAll(const LoginScreen());
       }
       return response;
     } catch (e) {

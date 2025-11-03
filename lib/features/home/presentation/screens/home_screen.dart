@@ -24,8 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final pages = [
     const MainScreen(),
-    AddQrScreen(),
-    AttendanceQrScreen(),
+    const AddQrScreen(),
+    const AttendanceQrScreen(),
     const ProfileScreen(),
   ];
   final titles = [

@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:fullcycle/core/cubit/base_cubit_state.dart';
 import 'package:fullcycle/core/resources/colors.dart';
+import 'package:fullcycle/features/events/cubit/join_event_cubit.dart';
+import 'package:fullcycle/shared/widgets/custom_button.dart';
+import 'package:fullcycle/shared/widgets/custom_loading_widget.dart';
 import 'package:geocoding/geocoding.dart';
 
 import '../../../services/date_helper.dart';
@@ -170,13 +175,13 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                     ],
                   ),
                   const SizedBox(height: 12),
-                    Expanded(
+                  Expanded(
                     child: TabBarView(
                       children: [
                         // Description Tab
                         Padding(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
                           child: SingleChildScrollView(
                             child: Text(
                               widget.event.description!,
@@ -194,26 +199,20 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
               ),
             ),
           ),
-          // Container(
-          //   padding: const EdgeInsets.all(16),
-          //   child: SizedBox(
-          //     width: double.infinity,
-          //     child: ElevatedButton(
-          //       onPressed: () {},
-          //       style: ElevatedButton.styleFrom(
-          //         backgroundColor: const Color(0xFF1A3C6E),
-          //         padding: const EdgeInsets.symmetric(vertical: 14),
-          //         shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(12),
-          //         ),
-          //       ),
-          //       child: const Text(
-          //         "قدم الآن",
-          //         style: TextStyle(fontSize: 16, color: Colors.white),
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 30),
+            child: BlocBuilder<JoinEventCubit, CubitState>(builder: (_, state) {
+              if (state == CubitState.loading) {
+                return const CustomLoadingButtonWidget();
+              }
+              return CustomElevatedButton(
+                onTap: () {
+                  context.read<JoinEventCubit>().joinEvent(widget.event.id);
+                },
+                buttonText: 'قدم الآن',
+              );
+            }),
+          )
         ],
       ),
     );

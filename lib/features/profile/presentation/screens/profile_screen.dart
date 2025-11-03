@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fullcycle/features/candidate/presentation/screens/update_bank_information_screen.dart';
@@ -8,6 +10,7 @@ import 'package:fullcycle/services/navigation/navigation.dart';
 import 'package:fullcycle/services/cache/cache_helper.dart';
 import 'package:fullcycle/shared/widgets/custom_divider.dart';
 import '../../../../core/resources/colors.dart';
+import '../../../security/screens/security_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -43,10 +46,7 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   buildItem('المعلومات البنكية', 'bank',
                       () => AppNavigation.navigate(const UserBanksScreen())),
-                  // const CustomDivider(),
-                  // buildItem('التحضير', 'qr', () => AppNavigation.navigate(const AttendanceQrScreen())),
-                  // const CustomDivider(),
-                  // buildItem('قم بالتحضير', 'qr', () => AppNavigation.navigate(const AddQrScreen())),
+
                   const CustomDivider(),
                   buildItem(
                       'مستنداتي  الشخصية',
@@ -61,57 +61,59 @@ class ProfileScreen extends StatelessWidget {
                 ],
               ),
             ),
-            // const Padding(
-            //   padding: EdgeInsets.only(top: 16, bottom: 12),
-            //   child: Text(
-            //     'الإعدادات والأمان',
-            //     style: TextStyle(
-            //         color: AppColors.textColor,
-            //         fontSize: 12,
-            //         fontWeight: FontWeight.w600),
-            //   ),
-            // ),
-            // Container(
-            //   decoration: BoxDecoration(
-            //     color: Colors.white,
-            //     borderRadius: BorderRadius.circular(12),
-            //   ),
-            //   child: Column(
-            //     children: [
-            //       buildItem('الامان', 'security',
-            //           () => AppNavigation.navigate(const SecurityScreen())),
-            //       const CustomDivider(),
-            //       buildItem('الاعدادت', 'settings', () {}),
-            //       const CustomDivider(),
-            //       buildItem('الاشعارات', 'notif', () {}),
-            //     ],
-            //   ),
-            // ),
-            // const Padding(
-            //   padding: EdgeInsets.only(top: 16, bottom: 12),
-            //   child: Text(
-            //     'الدعم والمعلومات',
-            //     style: TextStyle(
-            //         color: AppColors.textColor,
-            //         fontSize: 12,
-            //         fontWeight: FontWeight.w600),
-            //   ),
-            // ),
-            // Container(
-            //   decoration: BoxDecoration(
-            //     color: Colors.white,
-            //     borderRadius: BorderRadius.circular(12),
-            //   ),
-            //   child: Column(
-            //     children: [
-            //       buildItem('المساعدة', 'help', () {}),
-            //       const CustomDivider(),
-            //       buildItem('سياسة الخصوصية', 'privacy', () {}),
-            //       const CustomDivider(),
-            //       buildItem('تعرف عنا', 'info', () {}),
-            //     ],
-            //   ),
-            // ),
+            if (Platform.isAndroid) ...[
+              const Padding(
+                padding: EdgeInsets.only(top: 16, bottom: 12),
+                child: Text(
+                  'الإعدادات والأمان',
+                  style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  children: [
+                    buildItem('الامان', 'security',
+                        () => AppNavigation.navigate(const SecurityScreen())),
+                    const CustomDivider(),
+                    buildItem('الاعدادت', 'settings', () {}),
+                    const CustomDivider(),
+                    buildItem('الاشعارات', 'notif', () {}),
+                  ],
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 16, bottom: 12),
+                child: Text(
+                  'الدعم والمعلومات',
+                  style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  children: [
+                    buildItem('المساعدة', 'help', () {}),
+                    const CustomDivider(),
+                    buildItem('سياسة الخصوصية', 'privacy', () {}),
+                    const CustomDivider(),
+                    buildItem('تعرف عنا', 'info', () {}),
+                  ],
+                ),
+              ),
+            ],
             Container(
               margin: const EdgeInsets.only(top: 20, bottom: 50),
               decoration: BoxDecoration(

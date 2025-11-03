@@ -10,7 +10,6 @@ import 'package:fullcycle/shared/widgets/custom_loading_widget.dart';
 
 import '../../../../core/resources/colors.dart';
 import '../../../../services/cache/cache_helper.dart';
-import '../screens/edit_profile_screen.dart';
 import '../screens/share_qr_screen.dart';
 
 class ProfileHeader extends StatelessWidget {

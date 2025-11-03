@@ -18,10 +18,11 @@ class EndPoints {
   static const String getCandidate = 'Candidate/GetCandidate';
   static const String getAllActiveEvents = 'Event/GetAllActiveEvents';
   static const String getLookUps = 'LookUps/GetCandidateLookups';
-  static const String getZonesOfEvent = 'Event/GetZonesOfEvent';
-  static const String getSubZonesOfEvent = 'Event/GetSubZonesOfEvent';
+  static const String getZonesOfEvent = 'LookUps/GetEventZonesLookups';
+  static const String getSubZonesOfEvent = 'LookUps/GetEventSubZonesLookups';
   static const String candidateGetQrString = 'Candidate/GetQrString';
   static const String updateCandidate = 'Candidate/UpdateCandidate';
   static const String addCandidate = 'Candidate/AddCandidate';
   static const String attendCandidate = 'CandidateAttendance/AttendCandidate';
+  static const String joinEvent = 'AssignEventToCandidate';
 }
