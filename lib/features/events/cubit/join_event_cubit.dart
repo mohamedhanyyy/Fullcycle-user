@@ -9,7 +9,7 @@ class JoinEventCubit extends Cubit<CubitState> {
     emit(CubitState.loading);
 
     try {
-      final response = await CandidateRepository.joinEvent(id.toString());
+      final response = await CandidateRepository.joinEvent('$id');
       if (response != null) {
         emit(CubitState.done);
       } else {

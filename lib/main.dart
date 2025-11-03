@@ -9,7 +9,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await CacheHelper.init();
-  debugPrint(CacheHelper.getToken);
-  CandidateRepository.getLookUps();
+  await CandidateRepository.getLookUps();
   runApp(const RestartWidget(child: MyApp()));
 }

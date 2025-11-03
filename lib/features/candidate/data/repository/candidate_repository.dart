@@ -113,8 +113,10 @@ class CandidateRepository {
 
   static Future<Response?> joinEvent(String id) async {
     final response = await DioHelper.postData(
+      baseurl: 'https://api.mshware.com/',
         url: EndPoints.joinEvent, query: {'eventId': id});
     if (response?.statusCode == 200) {
+      CustomSnackBars.showSuccessToast(title: response?.data['message']);
       return response;
     } else {
       errorHandler(response);
@@ -320,9 +322,11 @@ class CandidateRepository {
     });
 
     if (response?.statusCode == 200) {
-      await CacheHelper.saveToken(response?.data['data']['authToken']);
-      await CacheHelper.saveRefreshToken(
-          response?.data['data']['refreshTokenId']);
+      final token = response?.data['data']['authToken'];
+      final refreshToken = response?.data['data']['refreshTokenId'];
+      //
+      await CacheHelper.saveToken(token);
+      await CacheHelper.saveRefreshToken(refreshToken);
     } else {
       errorHandler(response);
     }

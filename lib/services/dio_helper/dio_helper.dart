@@ -103,10 +103,10 @@ class DioHelper {
     }
   }
 
-  static Future<Response?> postData({required String url, data, query}) async {
+  static Future<Response?> postData({required String url, data, query,baseurl}) async {
     try {
       final response = await Dio(BaseOptions(
-        baseUrl: EndPoints.baseUrl,
+        baseUrl: baseurl??EndPoints.baseUrl,
         receiveDataWhenStatusError: true,
         followRedirects: false,
         validateStatus: (status) {
